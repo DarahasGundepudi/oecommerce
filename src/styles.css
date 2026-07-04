@@ -315,3 +315,16 @@
   background: linear-gradient(var(--forest), var(--turmeric));
   border-radius: 999px;
 }
+
+/* Fallback for browsers that do not support backdrop-filter (commonly older Windows browsers)
+   Make the glass panels fully opaque to avoid visual overlap/legibility issues when blur is unavailable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    /* Use an opaque cream background when backdrop-filter is unsupported */
+    background: rgba(247, 244, 237, 1);
+    background: oklch(0.98 0.008 88 / 1);
+  }
+  .glass-dark {
+    background: oklch(0.2 0.04 156 / 1);
+  }
+}

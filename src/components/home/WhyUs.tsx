@@ -50,7 +50,6 @@ export function WhyUs() {
               />
               <div className="text-display text-2xl text-forest-deep">{r.title}</div>
               <p className="mt-3 text-sm text-forest-deep/70 leading-relaxed">{r.copy}</p>
-              <div className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-forest/15 text-forest transition group-hover:bg-forest group-hover:text-cream">→</div>
             </motion.div>
           ))}
         </div>
