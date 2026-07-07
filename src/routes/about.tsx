@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ParticleField } from "@/components/ParticleField";
+import { RootNetwork } from "@/components/home/RootNetwork";
 import seedSprout from "@/assets/seed-sprout.jpg";
-import process from "@/assets/process-drying.jpg";
+import integrity from "@/assets/integrity.png";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -38,10 +39,12 @@ function AboutPage() {
         </div>
       </section>
 
+      <RootNetwork />
+
       <section className="py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:px-12">
           <div className="lg:order-2 overflow-hidden rounded-[2rem] shadow-soft">
-            <img src={process} alt="Sun-drying process" className="h-full w-full object-cover" loading="lazy" />
+            <img src={integrity} alt="Organic ingredient integrity from harvest to delivery" className="h-full w-full object-cover" loading="lazy" />
           </div>
           <div>
             <h2 className="text-display text-4xl text-forest-deep lg:text-5xl">Integrity, harvest to delivery.</h2>

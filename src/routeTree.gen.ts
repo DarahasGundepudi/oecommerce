@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WeServeRouteImport } from './routes/we-serve'
 import { Route as ProductsRouteImport } from './routes/products'
-import { Route as OurRootsRouteImport } from './routes/our-roots'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BulkOrderRouteImport } from './routes/bulk-order'
 import { Route as AboutRouteImport } from './routes/about'
@@ -27,11 +26,6 @@ const WeServeRoute = WeServeRouteImport.update({
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OurRootsRoute = OurRootsRouteImport.update({
-  id: '/our-roots',
-  path: '/our-roots',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -70,7 +64,6 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/bulk-order': typeof BulkOrderRoute
   '/contact': typeof ContactRoute
-  '/our-roots': typeof OurRootsRoute
   '/products': typeof ProductsRouteWithChildren
   '/we-serve': typeof WeServeRoute
   '/products/$slug': typeof ProductsSlugRoute
@@ -81,7 +74,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/bulk-order': typeof BulkOrderRoute
   '/contact': typeof ContactRoute
-  '/our-roots': typeof OurRootsRoute
   '/we-serve': typeof WeServeRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/products': typeof ProductsIndexRoute
@@ -92,7 +84,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/bulk-order': typeof BulkOrderRoute
   '/contact': typeof ContactRoute
-  '/our-roots': typeof OurRootsRoute
   '/products': typeof ProductsRouteWithChildren
   '/we-serve': typeof WeServeRoute
   '/products/$slug': typeof ProductsSlugRoute
@@ -105,7 +96,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/bulk-order'
     | '/contact'
-    | '/our-roots'
     | '/products'
     | '/we-serve'
     | '/products/$slug'
@@ -116,7 +106,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/bulk-order'
     | '/contact'
-    | '/our-roots'
     | '/we-serve'
     | '/products/$slug'
     | '/products'
@@ -126,7 +115,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/bulk-order'
     | '/contact'
-    | '/our-roots'
     | '/products'
     | '/we-serve'
     | '/products/$slug'
@@ -138,7 +126,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BulkOrderRoute: typeof BulkOrderRoute
   ContactRoute: typeof ContactRoute
-  OurRootsRoute: typeof OurRootsRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   WeServeRoute: typeof WeServeRoute
 }
@@ -157,13 +144,6 @@ declare module '@tanstack/react-router' {
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/our-roots': {
-      id: '/our-roots'
-      path: '/our-roots'
-      fullPath: '/our-roots'
-      preLoaderRoute: typeof OurRootsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -230,7 +210,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BulkOrderRoute: BulkOrderRoute,
   ContactRoute: ContactRoute,
-  OurRootsRoute: OurRootsRoute,
   ProductsRoute: ProductsRouteWithChildren,
   WeServeRoute: WeServeRoute,
 }

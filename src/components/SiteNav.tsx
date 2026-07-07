@@ -10,7 +10,6 @@ const NAV = [
   { to: "/about", label: "About" },
   { to: "/products", label: "Products" },
   { to: "/we-serve", label: "We Serve" },
-  { to: "/our-roots", label: "Our Roots" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -43,7 +42,7 @@ export function SiteNav() {
               className="h-10 sm:h-16 w-auto object-contain translate-y-1 sm:translate-y-2 transition-transform duration-300 group-hover:scale-105"
               style={{ mixBlendMode: "multiply" }}
             />
-            <span className="text-display text-[18px] sm:text-xl lg:text-2xl tracking-[0.13em] sm:tracking-[0.18em] lg:tracking-[0.22em] leading-tight">
+            <span className="text-display text-[18px] sm:text-xl lg:text-2xl tracking-[0.13em] sm:tracking-[0.18em] lg:tracking-[0.16em] leading-tight">
               <span className="whitespace-nowrap">
                 <span className="text-forest-deep">PHYTO</span>{" "}
                 <span className="text-turmeric">HEALTH</span>
@@ -53,12 +52,12 @@ export function SiteNav() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 xl:flex">
+          <nav className="ml-10 hidden items-center gap-1 xl:flex 2xl:ml-14">
             {NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="relative rounded-full px-4 py-2 text-[13px] font-medium uppercase tracking-[0.18em] text-forest-deep/70 transition-all duration-200 hover:text-turmeric hover:bg-forest-deep/5"
+                className="relative whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-medium uppercase tracking-[0.18em] text-forest-deep/70 transition-all duration-200 hover:text-turmeric hover:bg-forest-deep/5"
                 activeProps={{ className: "!text-forest-deep bg-forest-deep/8" }}
               >
                 {n.label}
@@ -89,14 +88,14 @@ export function SiteNav() {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-2 flex flex-col gap-1 rounded-3xl glass p-4 xl:hidden"
+            className="mt-2 flex flex-col gap-1 rounded-3xl border border-white/70 bg-cream/95 p-4 shadow-soft backdrop-blur-xl xl:hidden"
           >
             {NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className="rounded-2xl px-4 py-3 text-sm uppercase tracking-[0.2em] text-forest-deep/85 hover:bg-cream"
+                className="rounded-2xl px-4 py-3 text-sm uppercase tracking-[0.2em] text-forest-deep/85 transition hover:bg-forest-deep/5"
               >
                 {n.label}
               </Link>

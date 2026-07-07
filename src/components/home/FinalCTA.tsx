@@ -6,10 +6,11 @@ import { ParticleField } from "@/components/ParticleField";
 
 export function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-earth-grad py-32 text-cream lg:py-44">
+    <section className="relative overflow-hidden bg-earth-grad pt-32 pb-20 text-cream lg:pt-44 lg:pb-28">
       <ParticleField density={120} />
       <div className="absolute inset-0"
         style={{ background: "radial-gradient(ellipse at center, oklch(0.86 0.17 82 / 0.25), transparent 60%)" }}/>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-forest-deep/70" />
       <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-12">
         <motion.span
           initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
