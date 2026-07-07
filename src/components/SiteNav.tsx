@@ -57,7 +57,7 @@ export function SiteNav() {
               <Link
                 key={n.to}
                 to={n.to}
-                className="relative rounded-full px-4 py-2 text-[13px] font-medium uppercase tracking-[0.18em] text-forest-deep/70 transition-all duration-200 hover:text-turmeric hover:bg-forest-deep/5"
+                className="relative whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-medium uppercase tracking-[0.18em] text-forest-deep/70 transition-all duration-200 hover:text-turmeric hover:bg-forest-deep/5"
                 activeProps={{ className: "!text-forest-deep bg-forest-deep/8" }}
               >
                 {n.label}
