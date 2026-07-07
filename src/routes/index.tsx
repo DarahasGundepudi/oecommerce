@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomeHero, HomeStory } from "@/components/home/HomeHero";
-import { RootNetwork } from "@/components/home/RootNetwork";
 import { WhyUs } from "@/components/home/WhyUs";
 import { Industries } from "@/components/home/Industries";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -14,7 +13,6 @@ function Index() {
     <>
       <HomeHero />
       <HomeStory />
-      <RootNetwork />
       <WhyUs />
       <Industries />
       <FinalCTA />
