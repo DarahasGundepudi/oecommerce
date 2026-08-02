@@ -146,9 +146,12 @@ function BulkPage() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
+                  className="overflow-visible"
                 >
-                  <div className="mt-2 max-h-52 overflow-y-auto rounded-2xl border border-forest/10 bg-cream/80 divide-y divide-forest/5">
+                  <div
+                    className="mt-2 max-h-[18rem] overflow-y-auto overscroll-contain rounded-2xl border border-forest/10 bg-cream/80 divide-y divide-forest/5 pr-1"
+                    onWheel={(e) => e.stopPropagation()}
+                  >
                     {PRODUCTS.map((p) => {
                       const on = selected.includes(p.slug);
                       return (
