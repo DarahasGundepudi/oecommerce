@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS } from "@/data/products";
 import { MagneticButton } from "@/components/MagneticButton";
 import { ChevronDown, X } from "lucide-react";
+import { submitWeb3Forms } from "@/lib/web3forms";
+import React from "react";
 
 export const Route = createFileRoute("/bulk-order")({
   component: BulkPage,
@@ -31,16 +33,48 @@ const TIMELINE_OPTIONS = [
 function BulkPage() {
   const [selected, setSelected] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [resetSignal, setResetSignal] = useState(0);
+  const [formStatus, setFormStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+    type: "idle",
+    message: "",
+  });
 
   const toggle = (slug: string) =>
     setSelected((s) => (s.includes(slug) ? s.filter((x) => x !== slug) : [...s, slug]));
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const subject = `Bulk inquiry from ${fd.get("name")}`;
-    const body = `Company: ${fd.get("company")}%0D%0AEmail: ${fd.get("email")}%0D%0APhone: ${fd.get("phone")}%0D%0ACountry: ${fd.get("country")}%0D%0A%0D%0AProducts:%0D%0A${selected.join(", ")}%0D%0A%0D%0APackaging & Quantity:%0D%0A${encodeURIComponent(String(fd.get("packaging") ?? ""))}%0D%0A%0D%0ATimeline:%0D%0A${encodeURIComponent(String(fd.get("timeline") ?? ""))}%0D%0A%0D%0ANotes:%0D%0A${encodeURIComponent(String(fd.get("notes") ?? ""))}`;
-    window.location.href = `mailto:info@phytohealthorganics.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    const formData = new FormData();
+    formData.append("name", String(fd.get("name") ?? ""));
+    formData.append("company", String(fd.get("company") ?? ""));
+    formData.append("email", String(fd.get("email") ?? ""));
+    formData.append("phone", String(fd.get("phone") ?? ""));
+    formData.append("country", String(fd.get("country") ?? ""));
+    formData.append("products", selected.join(", "));
+    formData.append("packaging", String(fd.get("packaging") ?? ""));
+    formData.append("timeline", String(fd.get("timeline") ?? ""));
+    formData.append("notes", String(fd.get("notes") ?? ""));
+
+    try {
+      await submitWeb3Forms(formData, subject);
+      form.reset();
+      setSelected([]);
+      setDropdownOpen(false);
+      setResetSignal((value) => value + 1);
+      setFormStatus({
+        type: "success",
+        message: "Your bulk inquiry has been sent successfully.",
+      });
+    } catch (error) {
+      setFormStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Something went wrong while sending your inquiry.",
+      });
+    }
   };
 
   return (
@@ -66,7 +100,7 @@ function BulkPage() {
               <Input name="name" label="Name" required />
               <Input name="company" label="Company / Brand" />
               <Input name="email" label="Email" type="email" required />
-              <Input name="phone" label="Phone" />
+              <Input name="phone" label="Phone" type="tel" inputMode="tel" pattern="[+()\\-0-9\s]{7,40}" title="Enter a valid phone number" />
               <Input name="country" label="Country / City" />
             </div>
           </div>
@@ -147,13 +181,26 @@ function BulkPage() {
               <SelectField name="packaging" label="Packaging & quantity" options={PACKAGING_OPTIONS} placeholder="Select packaging…" />
               <SelectField name="timeline" label="Timeline" options={TIMELINE_OPTIONS} placeholder="Select timeline…" />
               <div className="sm:col-span-2">
-                <Textarea name="notes" label="Other notes" placeholder="Private label, certifications, blends, custom MOQ…" rows={6} showWordCount maxWords={250} />
+                <Textarea
+                  name="notes"
+                  label="Other notes"
+                  placeholder="Private label, certifications, blends, custom MOQ…"
+                  rows={6}
+                  showWordCount
+                  maxWords={250}
+                  resetSignal={resetSignal}
+                />
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center justify-center gap-3">
             <MagneticButton type="submit" variant="primary">Send Inquiry</MagneticButton>
+            {formStatus.type !== "idle" && (
+              <span className={`text-sm ${formStatus.type === "success" ? "text-forest" : "text-destructive"}`}>
+                {formStatus.message}
+              </span>
+            )}
           </div>
         </form>
       </section>
@@ -161,7 +208,32 @@ function BulkPage() {
   );
 }
 
-function Input({ name, label, type = "text", required }: { name: string; label: string; type?: string; required?: boolean }) {
+function Input({
+  name,
+  label,
+  type = "text",
+  required,
+  inputMode,
+  pattern,
+  title,
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  pattern?: string;
+  title?: string;
+}) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (name === "phone" || type === "tel") {
+      const sanitizedValue = e.target.value.replace(/[^0-9+()\-\s]/g, "");
+      if (sanitizedValue !== e.target.value) {
+        e.target.value = sanitizedValue;
+      }
+    }
+  };
+
   return (
     <label className="block">
       <span className="text-[10px] uppercase tracking-[0.3em] text-forest-deep/70">{label}{required && " *"}</span>
@@ -169,6 +241,10 @@ function Input({ name, label, type = "text", required }: { name: string; label: 
         name={name}
         type={type}
         required={required}
+        inputMode={inputMode}
+        pattern={pattern}
+        title={title}
+        onChange={handleChange}
         className="mt-2 w-full rounded-2xl bg-cream/70 border border-forest/15 px-4 py-3 text-sm outline-none transition focus:border-turmeric focus:ring-4 focus:ring-turmeric/20"
       />
     </label>
@@ -191,9 +267,31 @@ function SelectField({ name, label, options, placeholder }: { name: string; labe
   );
 }
 
-function Textarea({ name, label, placeholder, rows = 3, className = "", showWordCount, maxWords }: { name: string; label: string; placeholder?: string; rows?: number; className?: string; showWordCount?: boolean; maxWords?: number }) {
+function Textarea({
+  name,
+  label,
+  placeholder,
+  rows = 3,
+  className = "",
+  showWordCount,
+  maxWords,
+  resetSignal,
+}: {
+  name: string;
+  label: string;
+  placeholder?: string;
+  rows?: number;
+  className?: string;
+  showWordCount?: boolean;
+  maxWords?: number;
+  resetSignal?: number;
+}) {
   const [text, setText] = useState("");
   const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+
+  React.useEffect(() => {
+    setText("");
+  }, [resetSignal]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;

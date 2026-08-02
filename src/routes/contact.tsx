@@ -7,12 +7,21 @@ import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/MagneticButton";
 import { SocialIcons } from "@/components/SiteFooter";
 import touchEarth from "@/assets/touch-earth.jpg";
+import { submitWeb3Forms } from "@/lib/web3forms";
+
+const phoneRegex = /^\+?[0-9()\-\s]{7,40}$/;
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please share your name").max(80),
   company: z.string().trim().max(120).optional().or(z.literal("")),
   email: z.string().trim().email("Valid email required").max(160),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .or(z.literal(""))
+    .refine((value) => value === "" || phoneRegex.test(value), "Please enter a valid phone number"),
   message: z.string().trim().min(10, "A few more words please").max(3000, "Character limit exceeded"),
 });
 type FormData = z.infer<typeof schema>;
@@ -25,7 +34,10 @@ function ContactPage() {
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset, watch, setValue } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-  const [sent, setSent] = useState(false);
+  const [formStatus, setFormStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+    type: "idle",
+    message: "",
+  });
 
   const messageVal = watch("message") || "";
   const maxWords = 250;
@@ -54,11 +66,26 @@ function ContactPage() {
   };
 
   const onSubmit = async (data: FormData) => {
-    // Static submission: open mail client with prefilled body.
-    const body = `Name: ${data.name}%0D%0ACompany: ${data.company ?? ""}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone ?? ""}%0D%0A%0D%0A${encodeURIComponent(data.message)}`;
-    window.location.href = `mailto:info@phytohealthorganics.com?subject=${encodeURIComponent("Inquiry from " + data.name)}&body=${body}`;
-    setSent(true);
-    reset();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("company", data.company ?? "");
+    formData.append("email", data.email);
+    formData.append("phone", data.phone ?? "");
+    formData.append("message", data.message);
+
+    try {
+      await submitWeb3Forms(formData, `Inquiry from ${data.name}`);
+      setFormStatus({
+        type: "success",
+        message: "Thanks — your message has been sent successfully.",
+      });
+      reset();
+    } catch (error) {
+      setFormStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Something went wrong while sending your message.",
+      });
+    }
   };
 
   return (
@@ -89,7 +116,15 @@ function ContactPage() {
                   <input {...register("company")} className="ayra-input" placeholder="Your brand" />
                 </Field>
                 <Field label="Phone (optional)" error={errors.phone?.message}>
-                  <input {...register("phone")} className="ayra-input" placeholder="+91 ..." />
+                  <input
+                    {...register("phone")}
+                    type="tel"
+                    inputMode="tel"
+                    pattern="[+()\\-0-9\s]{7,40}"
+                    title="Enter a valid phone number"
+                    className="ayra-input"
+                    placeholder="+91 ..."
+                  />
                 </Field>
               </div>
               <Field label="Email" error={errors.email?.message}>
@@ -110,7 +145,11 @@ function ContactPage() {
               </Field>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <MagneticButton type="submit" variant="primary">{isSubmitting ? "Sending..." : "Send Message"}</MagneticButton>
-                {sent && <span className="text-sm text-forest">Opening your mail client…</span>}
+                {formStatus.type !== "idle" && (
+                  <span className={`text-sm ${formStatus.type === "success" ? "text-forest" : "text-destructive"}`}>
+                    {formStatus.message}
+                  </span>
+                )}
               </div>
               <style>{`.ayra-input { width:100%; border-radius: 1rem; background: oklch(1 0 0 / 0.6); border: 1px solid oklch(0.36 0.07 156 / 0.15); padding: 0.85rem 1rem; font-size: 0.95rem; color: oklch(0.2 0.04 158); outline: none; transition: all .25s; }
               .ayra-input:focus { border-color: oklch(0.86 0.17 82); box-shadow: 0 0 0 4px oklch(0.86 0.17 82 / 0.18); }`}</style>
