@@ -9,7 +9,7 @@ export const SHOW_LAUNCH_ANIMATION = true;
 const LAUNCH_STORAGE_KEY = "websiteLaunchSeen";
 const COUNTDOWN_STEP_MS = 1000;
 const LIVE_HOLD_MS = 1000;
-const countdownSteps = ["3", "2", "1", "WE'RE LIVE!"] as const;
+const countdownSteps = ["5", "4", "3", "2", "1", "WE'RE LIVE!"] as const;
 
 function shouldShowLaunch() {
   if (!SHOW_LAUNCH_ANIMATION || typeof window === "undefined") return false;
@@ -36,16 +36,24 @@ export function LaunchAnimation() {
   useEffect(() => {
     if (!isVisible) return;
 
+    const countdownTimers = countdownSteps
+      .slice(1, -1)
+      .map((_, index) =>
+        window.setTimeout(() => setStep(index + 1), COUNTDOWN_STEP_MS * (index + 1)),
+      );
+
     const timers = [
-      window.setTimeout(() => setStep(1), COUNTDOWN_STEP_MS),
-      window.setTimeout(() => setStep(2), COUNTDOWN_STEP_MS * 2),
-      window.setTimeout(() => setStep(3), COUNTDOWN_STEP_MS * 3),
+      ...countdownTimers,
+      window.setTimeout(
+        () => setStep(countdownSteps.length - 1),
+        COUNTDOWN_STEP_MS * (countdownSteps.length - 1),
+      ),
       window.setTimeout(
         () => {
           markLaunchSeen();
           setIsVisible(false);
         },
-        COUNTDOWN_STEP_MS * 3 + LIVE_HOLD_MS,
+        COUNTDOWN_STEP_MS * (countdownSteps.length - 1) + LIVE_HOLD_MS,
       ),
     ];
 
