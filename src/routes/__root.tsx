@@ -1,14 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
 
 import { SmoothScroll } from "../components/SmoothScroll";
 import { OrganicCursor } from "../components/OrganicCursor";
-import { Preloader } from "../components/Preloader";
+import { LaunchAnimation } from "../components/LaunchAnimation";
 import { SiteNav } from "../components/SiteNav";
 import { SiteFooter } from "../components/SiteFooter";
 import { ScrollToTop } from "../components/ScrollToTop";
@@ -47,7 +42,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="rounded-full bg-forest px-5 py-2.5 text-xs font-medium uppercase tracking-[0.2em] text-cream hover:bg-turmeric hover:text-forest-deep"
           >
             Try again
@@ -75,7 +73,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SmoothScroll>
-        <Preloader />
+        <LaunchAnimation />
         <OrganicCursor />
         <div className="grain relative min-h-screen bg-cream text-forest-deep">
           <SiteNav />
