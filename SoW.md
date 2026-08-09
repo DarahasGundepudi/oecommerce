@@ -1,10 +1,11 @@
 # Statement of Work (SoW)
+
 ## Phyto Health Organics — E-Commerce Platform
 
 **Project:** Phyto Health Organics Online Shop  
 **Type:** Full-Stack E-Commerce Web Application  
 **Prepared:** April 2026  
-**Delivery Timeline:** 45 days from the date of agreement signing  
+**Delivery Timeline:** 45 days from the date of agreement signing
 
 ---
 
@@ -13,32 +14,33 @@
 Phyto Health Organics is a premium organic powders brand based in Hyderabad, India. This SoW defines the scope of work to build a complete, production-ready e-commerce platform on top of the existing React/Vite prototype, covering a **User-facing Storefront** and a **Admin Dashboard**.
 
 ### Current State (Already Built)
-| Feature | Status |
-|---|---|
+
+| Feature                                        | Status  |
+| ---------------------------------------------- | ------- |
 | Product listing with category filters & search | ✅ Done |
-| Product detail page | ✅ Done |
-| Cart — add / update qty / remove | ✅ Done |
-| Cart sidebar with toast notifications | ✅ Done |
-| Basic routing (React Router DOM) | ✅ Done |
+| Product detail page                            | ✅ Done |
+| Cart — add / update qty / remove               | ✅ Done |
+| Cart sidebar with toast notifications          | ✅ Done |
+| Basic routing (React Router DOM)               | ✅ Done |
 
 ---
 
 ## 2. Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | React 18, Vite, React Router DOM |
-| Backend | Java Spring Boot REST API |
-| Server | AWS EC2 |
-| Database | AWS RDS (PostgreSQL) |
-| File Storage | AWS S3 (product images, report exports) |
-| Auth | JWT-based authentication |
-| Payments | Cashfree (INR support, UPI, cards, net banking) |
-| Transactional Email | AWS SES (order confirmation emails to users) |
-| Admin Alerts | Slack Incoming Webhook (new-order notifications to admin channel) |
-| Hosting | AWS EC2 (Nginx — serves React build + reverse proxies Spring Boot API) |
-| DNS | Hostinger (domain: phytohealthorganics.com) → AWS EC2 |
-| Analytics | PostHog or custom analytics on RDS |
+| Layer               | Technology                                                             |
+| ------------------- | ---------------------------------------------------------------------- |
+| Frontend            | React 18, Vite, React Router DOM                                       |
+| Backend             | Java Spring Boot REST API                                              |
+| Server              | AWS EC2                                                                |
+| Database            | AWS RDS (PostgreSQL)                                                   |
+| File Storage        | AWS S3 (product images, report exports)                                |
+| Auth                | JWT-based authentication                                               |
+| Payments            | Cashfree (INR support, UPI, cards, net banking)                        |
+| Transactional Email | AWS SES (order confirmation emails to users)                           |
+| Admin Alerts        | Slack Incoming Webhook (new-order notifications to admin channel)      |
+| Hosting             | AWS EC2 (Nginx — serves React build + reverse proxies Spring Boot API) |
+| DNS                 | Hostinger (domain: phytohealthorganics.com) → AWS EC2                  |
+| Analytics           | PostHog or custom analytics on RDS                                     |
 
 > **Note:** Backend API will be hosted on an AWS EC2 instance with PostgreSQL on AWS RDS. Frontend remains on the existing React/Vite stack.
 
@@ -49,6 +51,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 ### 3.1 User Dashboard (Storefront)
 
 #### Module 1 — Authentication
+
 - Sign up / Sign in via **Google OAuth** and **Email + Password**
 - Email verification flow
 - Forgot password / reset password
@@ -56,23 +59,27 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - Protected routes (cart, orders, profile require login)
 
 #### Module 2 — Product Listing (Enhancement)
+
 - **Existing:** Category filters, keyword search ✅
 - Price range filter (slider)
 - Sort by: Price Low–High, High–Low, Newest, Best Rated
 - Paginated or infinite-scroll product grid
 
 #### Module 3 — Product Detail Page (Enhancement)
+
 - **Existing:** Product detail view ✅
 - Customer **reviews section** — display average rating, star breakdown, review list
 - Submit a review (authenticated users only) — star rating + text + optional photo
 - Related / recommended products section
 
 #### Module 4 — Cart & Pincode Check (Enhancement)
+
 - **Existing:** Add / subtract / remove items ✅
 - Pincode input field → estimated delivery date lookup (via static table or postal API)
 - Cart persistence (localStorage for guests, PostgreSQL (RDS) for logged-in users)
 
 #### Module 5 — Checkout & Payment
+
 - Order summary page before payment
 - Shipping address form (auto-fill from saved profile)
 - Integration with **Cashfree** payment gateway
@@ -84,25 +91,29 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - **Order Placed — Admin Slack Alert (via Slack Incoming Webhook):** a message posted to the designated admin Slack channel with customer name, order ID, total amount, and item count; triggered server-side from Spring Boot so no webhook URL is exposed in the client bundle
 
 #### Module 6 — Orders
+
 - **Orders list page** — all past orders with status badges (Placed, Processing, Shipped, Delivered, Cancelled, Refund Initiated, Refunded)
 - **Order detail page** — itemised breakdown, shipping address, payment method, tracking info placeholder
-- **Order cancellation by user** — user can cancel an order only while it is in *Placed* or *Processing* status; once the order moves to *Shipped* the cancel option is hidden and a return must be raised instead; on cancellation the order status updates to *Cancelled*, a Cashfree refund is initiated automatically (for paid orders), and a cancellation confirmation email is sent to the user
-- **Return request** — user can raise a return request on a *Delivered* order within a configurable window (e.g. 7 days); request captures reason and optional photo; admin reviews and approves/rejects via Module 14; on approval a Cashfree refund is triggered
+- **Order cancellation by user** — user can cancel an order only while it is in _Placed_ or _Processing_ status; once the order moves to _Shipped_ the cancel option is hidden and a return must be raised instead; on cancellation the order status updates to _Cancelled_, a Cashfree refund is initiated automatically (for paid orders), and a cancellation confirmation email is sent to the user
+- **Return request** — user can raise a return request on a _Delivered_ order within a configurable window (e.g. 7 days); request captures reason and optional photo; admin reviews and approves/rejects via Module 14; on approval a Cashfree refund is triggered
 - Reorder button (adds items back to cart)
 - **(Optional) Invoice / Receipt PDF download** — a downloadable PDF invoice per order, generated server-side (Spring Boot), containing order ID, date, itemised list, GST breakdown, and delivery address; available from the order detail page
 
 #### Module 7 — Profile Page
+
 - View and edit: Full name, phone number, email (read-only if Google login)
 - Manage saved delivery addresses (add / edit / delete, set default)
 - Change password (email login only)
 - Account deletion option
 
 #### Module 8 — Static Pages
+
 - **About Us** — brand story, farm origin (Hyderabad), certifications, team
 - **Contact Us** — contact form (name, email, message) → email notification to admin
 - **Feedback** — structured feedback form with rating and category tags
 
 #### Module 9 — Home Page Enhancements
+
 - **Reviews Carousel** — curated best reviews displayed as a carousel/slider on the home page
 - Featured / bestseller product section
 - SEO meta tags (title, description, OG tags) per page
@@ -114,6 +125,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 **Access:** `/admin` route — protected, role-based (admin role stored in RDS, enforced via JWT middleware)
 
 #### Module 10 — Product Management
+
 - **Add product** — form with all fields (name, category, price, original price, weight, description, key features, uses, benefits, specs, images)
 - **Edit product** — pre-filled form with same fields
 - **Delete product** — soft delete with confirmation dialog
@@ -121,6 +133,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - **Stock management** — each product has a stock quantity field in the database; admin can update stock levels from the product edit form; stock decrements automatically when an order is placed and restores if the order is cancelled or return is approved; storefront shows an **Out of Stock** badge and disables the Add to Cart button when stock reaches 0; a **Low Stock** warning badge (configurable threshold, default ≤ 10 units) is shown on product cards in the admin dashboard
 
 #### Module 11 — Discount & Promotions
+
 - Create / edit / delete discount rules
 - Discount types:
   - **Category-wide** — apply % or flat discount to an entire category
@@ -130,6 +143,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - Active discount badge shown on product cards in storefront
 
 #### Module 12 — Analytics
+
 - Dashboard overview cards: Total revenue, Total orders, Active users, Conversion rate
 - Revenue chart (daily / weekly / monthly toggle)
 - Top-selling products table
@@ -138,6 +152,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - Powered by PostHog or custom queries on RDS
 
 #### Module 13 — Report Generation
+
 - Generate and download reports as **CSV / PDF**:
   - Sales report (by date range)
   - Product performance report
@@ -146,6 +161,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - Scheduled report emails (optional / phase 2)
 
 #### Module 14 — Order Management (Admin)
+
 - **Recent Orders panel** on the admin dashboard home — latest 10 orders with customer name, order ID, total, and status badge
 - **All orders table** — paginated, filterable by status (Placed, Processing, Shipped, Delivered, Cancelled) and date range, searchable by customer name / order ID
 - **Order detail view** — full breakdown: customer info, delivery address, itemised cart, payment method, and current status
@@ -153,6 +169,7 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 - **Return request management** — admin can view pending return requests, approve or reject them with a reason, and trigger refund via Cashfree on approval
 
 #### Module 15 — Audit Logs
+
 - Immutable log of all admin actions with timestamp, actor email, and action detail
 - Actions logged: product created/updated/deleted, discount created/updated/deleted, order status changed, user role changed
 - Searchable and filterable log table (by date, actor, action type)
@@ -177,14 +194,14 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 
 ## 5. Deliverables
 
-| # | Deliverable |
-|---|---|
-| 1 | Deployed production at **phytohealthorganics.com** (AWS EC2 via Nginx) |
-| 2 | Source code repository (GitHub) with README |
-| 3 | AWS EC2 + RDS setup, environment configuration, and S3 bucket for file storage |
-| 4 | Cashfree integration with test & live key configuration guide |
-| 5 | Admin account setup and onboarding guide |
-| 6 | Basic CI/CD pipeline (GitHub Actions → auto deploy on merge to main) |
+| #   | Deliverable                                                                    |
+| --- | ------------------------------------------------------------------------------ |
+| 1   | Deployed production at **phytohealthorganics.com** (AWS EC2 via Nginx)         |
+| 2   | Source code repository (GitHub) with README                                    |
+| 3   | AWS EC2 + RDS setup, environment configuration, and S3 bucket for file storage |
+| 4   | Cashfree integration with test & live key configuration guide                  |
+| 5   | Admin account setup and onboarding guide                                       |
+| 6   | Basic CI/CD pipeline (GitHub Actions → auto deploy on merge to main)           |
 
 ---
 
@@ -202,9 +219,9 @@ Phyto Health Organics is a premium organic powders brand based in Hyderabad, Ind
 
 ## ❓ Open Questions (Require Client Decision)
 
-| # | Question | Options |
-|---|----------|---------|
-| 1 | **Cash on Delivery (COD)** — Should COD be offered as a payment option? Cashfree supports COD natively. COD orders increase reach (especially for first-time buyers in India) but introduce non-payment risk and require manual cash reconciliation on delivery. | **Yes — include COD** / **No — online payments only** |
+| #   | Question                                                                                                                                                                                                                                                         | Options                                               |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| 1   | **Cash on Delivery (COD)** — Should COD be offered as a payment option? Cashfree supports COD natively. COD orders increase reach (especially for first-time buyers in India) but introduce non-payment risk and require manual cash reconciliation on delivery. | **Yes — include COD** / **No — online payments only** |
 
 ---
 
@@ -242,4 +259,4 @@ Phase 6 — Polish & Launch
 
 ---
 
-*This SoW is subject to change upon mutual agreement. Any additions to scope will be handled via a Change Request.*
+_This SoW is subject to change upon mutual agreement. Any additions to scope will be handled via a Change Request._

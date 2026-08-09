@@ -3,12 +3,48 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const BRANCHES = [
-  { id: "organic", label: "Organic Farming", angle: -70, len: 220, copy: "Regenerative practices, no synthetic pesticides, soil-first cultivation." },
-  { id: "hygiene", label: "Hygienic Production", angle: -45, len: 250, copy: "Stainless-steel facility, cleanroom protocols, lab-tested batches." },
-  { id: "nutrient", label: "Nutrient Preservation", angle: -15, len: 270, copy: "Low-temperature drying & milling protect vitamins and aromatics." },
-  { id: "export", label: "Export Quality", angle: 15, len: 270, copy: "FSSAI, ISO & export-grade packaging — globally compliant." },
-  { id: "sustain", label: "Sustainability", angle: 45, len: 250, copy: "drying, water recycling, zero-waste milling, biodegradable packs." },
-  { id: "label", label: "Private Labelling", angle: 70, len: 220, copy: "Your brand, our craft — necessary packaging certifications." },
+  {
+    id: "organic",
+    label: "Organic Farming",
+    angle: -70,
+    len: 220,
+    copy: "Regenerative practices, no synthetic pesticides, soil-first cultivation.",
+  },
+  {
+    id: "hygiene",
+    label: "Hygienic Production",
+    angle: -45,
+    len: 250,
+    copy: "Stainless-steel facility, cleanroom protocols, lab-tested batches.",
+  },
+  {
+    id: "nutrient",
+    label: "Nutrient Preservation",
+    angle: -15,
+    len: 270,
+    copy: "Low-temperature drying & milling protect vitamins and aromatics.",
+  },
+  {
+    id: "export",
+    label: "Export Quality",
+    angle: 15,
+    len: 270,
+    copy: "FSSAI, ISO & export-grade packaging — globally compliant.",
+  },
+  {
+    id: "sustain",
+    label: "Sustainability",
+    angle: 45,
+    len: 250,
+    copy: "drying, water recycling, zero-waste milling, biodegradable packs.",
+  },
+  {
+    id: "label",
+    label: "Private Labelling",
+    angle: 70,
+    len: 220,
+    copy: "Your brand, our craft — necessary packaging certifications.",
+  },
 ];
 
 export function RootNetwork() {
@@ -16,20 +52,27 @@ export function RootNetwork() {
 
   return (
     <section className="relative overflow-hidden bg-forest-grad py-32 text-cream lg:py-44">
-      <div className="absolute inset-0 opacity-25 mix-blend-overlay"
-        style={{ background: "radial-gradient(ellipse at top, oklch(0.86 0.17 82 / 0.6), transparent 60%)" }}/>
+      <div
+        className="absolute inset-0 opacity-25 mix-blend-overlay"
+        style={{
+          background: "radial-gradient(ellipse at top, oklch(0.86 0.17 82 / 0.6), transparent 60%)",
+        }}
+      />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.45em] text-turmeric-glow">Roots that hold</span>
+              <span className="text-[10px] uppercase tracking-[0.45em] text-turmeric-glow">
+                Roots that hold
+              </span>
               <h2 className="mt-3 text-display text-[clamp(36px,5vw,72px)] leading-[1.02]">
                 An ecosystem
-                <br /><em className="not-italic shimmer-text">grown together</em>.
+                <br />
+                <em className="not-italic shimmer-text">grown together</em>.
               </h2>
               <p className="mt-6 max-w-md text-cream/80 leading-relaxed">
-                Every branch of Phyto Health Organics feeds the same root — a commitment to
-                purity, to people and to the planet that holds it all.
+                Every branch of Phyto Health Organics feeds the same root — a commitment to purity,
+                to people and to the planet that holds it all.
               </p>
             </div>
             <ul className="mt-8 grid grid-cols-2 gap-2 text-sm text-cream/85">
@@ -40,7 +83,9 @@ export function RootNetwork() {
                   onMouseLeave={() => setActive(null)}
                   data-cursor="hover"
                   className={`cursor-pointer rounded-full border border-cream/15 px-4 py-2 transition ${
-                    active === b.id ? "bg-turmeric/20 border-turmeric/40 text-cream" : "hover:border-cream/40"
+                    active === b.id
+                      ? "bg-turmeric/20 border-turmeric/40 text-cream"
+                      : "hover:border-cream/40"
                   }`}
                 >
                   · {b.label}
@@ -68,9 +113,16 @@ export function RootNetwork() {
 
                 {/* trunk */}
                 <motion.line
-                  x1="0" y1="0" x2="0" y2="40"
-                  stroke="oklch(0.86 0.17 82)" strokeWidth="3" strokeLinecap="round"
-                  initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="40"
+                  stroke="oklch(0.86 0.17 82)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8 }}
                 />
 
@@ -88,15 +140,22 @@ export function RootNetwork() {
                         d={`M0 40 Q ${cx} ${cy} ${ex} ${ey}`}
                         stroke={isActive ? "oklch(0.86 0.17 82)" : "url(#branchG)"}
                         strokeWidth={isActive ? 2.4 : 1.6}
-                        fill="none" strokeLinecap="round"
+                        fill="none"
+                        strokeLinecap="round"
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.1, delay: 0.2 + i * 0.08 }}
-                        style={{ filter: isActive ? "drop-shadow(0 0 8px oklch(0.86 0.17 82 / 0.7))" : "none" }}
+                        style={{
+                          filter: isActive
+                            ? "drop-shadow(0 0 8px oklch(0.86 0.17 82 / 0.7))"
+                            : "none",
+                        }}
                       />
                       <motion.circle
-                        cx={ex} cy={ey} r={isActive ? 7 : 4.5}
+                        cx={ex}
+                        cy={ey}
+                        r={isActive ? 7 : 4.5}
                         fill="oklch(0.86 0.17 82)"
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
@@ -117,7 +176,9 @@ export function RootNetwork() {
               >
                 {active ? (
                   <>
-                    <div className="text-[10px] uppercase tracking-[0.35em] text-turmeric-glow">Branch</div>
+                    <div className="text-[10px] uppercase tracking-[0.35em] text-turmeric-glow">
+                      Branch
+                    </div>
                     <div className="mt-1 text-display text-xl text-cream">
                       {BRANCHES.find((b) => b.id === active)!.label}
                     </div>
@@ -127,12 +188,15 @@ export function RootNetwork() {
                   </>
                 ) : (
                   <>
-                    <div className="text-[10px] uppercase tracking-[0.35em] text-turmeric-glow">Hover</div>
+                    <div className="text-[10px] uppercase tracking-[0.35em] text-turmeric-glow">
+                      Hover
+                    </div>
                     <div className="mt-1 text-display text-xl text-cream">
                       Six roots, one promise.
                     </div>
                     <p className="mt-3 text-sm text-cream/70 leading-relaxed">
-                      Move across the branches to feel each pillar of the Phyto Health Organics standard.
+                      Move across the branches to feel each pillar of the Phyto Health Organics
+                      standard.
                     </p>
                   </>
                 )}

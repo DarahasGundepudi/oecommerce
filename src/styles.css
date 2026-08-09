@@ -192,7 +192,10 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -216,14 +219,31 @@
 }
 
 /* Cinematic utilities */
-.text-display { font-family: var(--font-display); letter-spacing: -0.03em; }
-.bg-sunrise { background: var(--gradient-sunrise); }
-.bg-forest-grad { background: var(--gradient-forest); }
-.bg-golden { background: var(--gradient-golden); }
-.bg-earth-grad { background: var(--gradient-earth); }
-.shadow-soft { box-shadow: var(--shadow-soft); }
-.shadow-glow-gold { box-shadow: var(--shadow-glow-gold); }
-.shadow-glow-forest { box-shadow: var(--shadow-glow-forest); }
+.text-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+.bg-sunrise {
+  background: var(--gradient-sunrise);
+}
+.bg-forest-grad {
+  background: var(--gradient-forest);
+}
+.bg-golden {
+  background: var(--gradient-golden);
+}
+.bg-earth-grad {
+  background: var(--gradient-earth);
+}
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+.shadow-glow-gold {
+  box-shadow: var(--shadow-glow-gold);
+}
+.shadow-glow-forest {
+  box-shadow: var(--shadow-glow-forest);
+}
 .glass {
   /* Solid cream base — ensures legibility when backdrop-filter is unsupported (e.g. Android WebView) */
   background: rgba(247, 244, 237, 0.96);
@@ -250,30 +270,66 @@
 
 /* Magnetic / breathing animations */
 @keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.04); opacity: 1; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
 }
 @keyframes drift {
-  0% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-12px) translateX(6px); }
-  100% { transform: translateY(0) translateX(0); }
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-12px) translateX(6px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
 }
 @keyframes sway {
-  0%, 100% { transform: rotate(-1.5deg); }
-  50% { transform: rotate(1.5deg); }
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
 }
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.86 0.17 82 / 0.5); }
-  50% { box-shadow: 0 0 40px 10px oklch(0.86 0.17 82 / 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.86 0.17 82 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px 10px oklch(0.86 0.17 82 / 0);
+  }
 }
-.animate-breathe { animation: breathe 6s ease-in-out infinite; }
-.animate-drift { animation: drift 9s ease-in-out infinite; }
-.animate-sway { animation: sway 7s ease-in-out infinite; transform-origin: bottom center; }
-.animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+.animate-breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 9s ease-in-out infinite;
+}
+.animate-sway {
+  animation: sway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
 
 .shimmer-text {
   background: linear-gradient(
@@ -291,17 +347,24 @@
 }
 
 .text-legible {
-  text-shadow: 0 1px 2px oklch(1 0 0 / 0.55), 0 2px 24px oklch(1 0 0 / 0.35);
+  text-shadow:
+    0 1px 2px oklch(1 0 0 / 0.55),
+    0 2px 24px oklch(1 0 0 / 0.35);
 }
 
 /* Custom cursor */
 @media (hover: hover) and (pointer: fine) {
-  .has-cursor, .has-cursor * { cursor: none !important; }
+  .has-cursor,
+  .has-cursor * {
+    cursor: none !important;
+  }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -309,8 +372,13 @@
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(var(--forest), var(--turmeric));
   border-radius: 999px;

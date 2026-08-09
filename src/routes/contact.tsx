@@ -22,7 +22,11 @@ const schema = z.object({
     .optional()
     .or(z.literal(""))
     .refine((value) => value === "" || phoneRegex.test(value), "Please enter a valid phone number"),
-  message: z.string().trim().min(10, "A few more words please").max(3000, "Character limit exceeded"),
+  message: z
+    .string()
+    .trim()
+    .min(10, "A few more words please")
+    .max(3000, "Character limit exceeded"),
 });
 type FormData = z.infer<typeof schema>;
 
@@ -31,10 +35,20 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, watch, setValue } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    watch,
+    setValue,
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-  const [formStatus, setFormStatus] = useState<{ type: "idle" | "success" | "error"; message: string }>({
+  const [formStatus, setFormStatus] = useState<{
+    type: "idle" | "success" | "error";
+    message: string;
+  }>({
     type: "idle",
     message: "",
   });
@@ -83,7 +97,10 @@ function ContactPage() {
     } catch (error) {
       setFormStatus({
         type: "error",
-        message: error instanceof Error ? error.message : "Something went wrong while sending your message.",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong while sending your message.",
       });
     }
   };
@@ -105,8 +122,12 @@ function ContactPage() {
 
       <section className="pb-24">
         <div className="mx-auto max-w-5xl px-6 lg:px-12 space-y-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="rounded-3xl glass p-8 lg:p-10 [border-top:none]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-3xl glass p-8 lg:p-10 [border-top:none]"
+          >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <Field label="Your name" error={errors.name?.message}>
                 <input {...register("name")} className="ayra-input" placeholder="Asha Patel" />
@@ -128,25 +149,34 @@ function ContactPage() {
                 </Field>
               </div>
               <Field label="Email" error={errors.email?.message}>
-                <input {...register("email")} type="email" className="ayra-input" placeholder="you@brand.com" />
+                <input
+                  {...register("email")}
+                  type="email"
+                  className="ayra-input"
+                  placeholder="you@brand.com"
+                />
               </Field>
               <Field label="Message" error={errors.message?.message}>
-                <textarea 
-                  {...messageRegisterRest} 
+                <textarea
+                  {...messageRegisterRest}
                   onChange={handleMessageChange}
                   maxLength={3000}
-                  rows={5} 
-                  className="ayra-input resize-none" 
-                  placeholder="Tell us about the powder, quantity and timeline you're considering..." 
+                  rows={5}
+                  className="ayra-input resize-none"
+                  placeholder="Tell us about the powder, quantity and timeline you're considering..."
                 />
                 <div className="mt-1.5 text-right text-xs text-forest-deep/40">
-                  {words}/{maxWords} word{words !== 1 ? 's' : ''}
+                  {words}/{maxWords} word{words !== 1 ? "s" : ""}
                 </div>
               </Field>
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <MagneticButton type="submit" variant="primary">{isSubmitting ? "Sending..." : "Send Message"}</MagneticButton>
+                <MagneticButton type="submit" variant="primary">
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </MagneticButton>
                 {formStatus.type !== "idle" && (
-                  <span className={`text-sm ${formStatus.type === "success" ? "text-forest" : "text-destructive"}`}>
+                  <span
+                    className={`text-sm ${formStatus.type === "success" ? "text-forest" : "text-destructive"}`}
+                  >
                     {formStatus.message}
                   </span>
                 )}
@@ -157,25 +187,42 @@ function ContactPage() {
           </motion.div>
 
           <div className="lg:col-span-5 space-y-4">
-            <a href="https://wa.me/917899868441" target="_blank" rel="noreferrer"
-              className="block rounded-3xl bg-[oklch(0.7_0.16_150)] p-7 text-cream shadow-soft hover:scale-[1.01] transition">
+            <a
+              href="https://wa.me/917899868441"
+              target="_blank"
+              rel="noreferrer"
+              className="block rounded-3xl bg-[oklch(0.7_0.16_150)] p-7 text-cream shadow-soft hover:scale-[1.01] transition"
+            >
               <div className="text-[10px] uppercase tracking-[0.4em] opacity-80">WhatsApp</div>
               <div className="mt-2 text-display text-2xl">+91 78998 68441</div>
               <div className="mt-2 text-sm opacity-90">Chat with our team — fastest response.</div>
             </a>
-            <a href="mailto:info@phytohealthorganics.com" className="block rounded-3xl bg-forest p-7 text-cream shadow-soft">
+            <a
+              href="mailto:info@phytohealthorganics.com"
+              className="block rounded-3xl bg-forest p-7 text-cream shadow-soft"
+            >
               <div className="text-[10px] uppercase tracking-[0.4em] text-turmeric-glow">Email</div>
-              <div className="mt-2 text-display text-2xl break-all">info@phytohealthorganics.com</div>
-              <div className="mt-2 text-sm text-cream/80">For samples, pricing & specifications.</div>
+              <div className="mt-2 text-display text-2xl break-all">
+                info@phytohealthorganics.com
+              </div>
+              <div className="mt-2 text-sm text-cream/80">
+                For samples, pricing & specifications.
+              </div>
             </a>
             <div className="rounded-3xl bg-forest-deep p-7 text-cream">
-              <div className="text-[10px] uppercase tracking-[0.4em] text-turmeric-glow">Follow Us</div>
-              <p className="mt-2 text-sm text-cream/70">Stay connected for updates, new products and organic living tips.</p>
+              <div className="text-[10px] uppercase tracking-[0.4em] text-turmeric-glow">
+                Follow Us
+              </div>
+              <p className="mt-2 text-sm text-cream/70">
+                Stay connected for updates, new products and organic living tips.
+              </p>
               <SocialIcons className="mt-5 [&_a]:border-cream/25 [&_a]:bg-cream/10 [&_a:hover]:border-turmeric/70 [&_a:hover]:bg-cream/20" />
             </div>
             <div className="rounded-3xl glass p-7 sm:col-span-2 lg:col-span-1">
               <div className="text-[10px] uppercase tracking-[0.4em] text-turmeric">Visit</div>
-              <div className="mt-2 text-display text-2xl text-forest-deep">Phyto Health Organics</div>
+              <div className="mt-2 text-display text-2xl text-forest-deep">
+                Phyto Health Organics
+              </div>
               <p className="mt-2 text-sm text-forest-deep/70">Bangalore, Karnataka, India</p>
               <div className="mt-4 overflow-hidden rounded-2xl">
                 <iframe
@@ -193,7 +240,15 @@ function ContactPage() {
   );
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function Field({
+  label,
+  error,
+  children,
+}: {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
   return (
     <label className="block">
       <span className="text-[10px] uppercase tracking-[0.3em] text-forest-deep/70">{label}</span>
