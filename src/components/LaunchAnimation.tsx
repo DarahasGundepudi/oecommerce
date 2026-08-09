@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 
-export const SHOW_LAUNCH_ANIMATION = true;
+export const SHOW_LAUNCH_ANIMATION = false;
 
 const LAUNCH_STORAGE_KEY = "websiteLaunchSeen";
 const COUNTDOWN_STEP_MS = 1000;
