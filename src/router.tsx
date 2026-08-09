@@ -6,7 +6,7 @@ const queryClient = new QueryClient();
 
 export const router = createRouter({
   routeTree,
-  basepath: "/oecommerce",
+  basepath: "/",
   context: { queryClient },
   scrollRestoration: false,
   defaultPreloadStaleTime: 0,

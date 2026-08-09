@@ -60,12 +60,7 @@ export function HomeHero() {
           style={{ opacity: farmOpacity, scale: farmScale }}
           className="absolute inset-0"
         >
-          <img
-            src={heroFarm}
-            alt=""
-            className="h-full w-full object-cover"
-            fetchPriority="high"
-          />
+          <img src={heroFarm} alt="" className="h-full w-full object-cover" fetchPriority="high" />
           {/* Stronger scrim for legibility of hero text */}
           <div className="absolute inset-0 bg-gradient-to-b from-cream/70 via-cream/30 to-cream" />
           <div className="absolute inset-x-0 top-0 h-[55vh] bg-gradient-to-b from-cream/85 via-cream/40 to-transparent" />
@@ -77,8 +72,12 @@ export function HomeHero() {
           style={{ y: sunY }}
           className="absolute right-[12%] top-[8%] h-[28vmin] w-[28vmin] rounded-full"
         >
-          <div className="absolute inset-0 rounded-full"
-            style={{ background: "radial-gradient(circle, oklch(0.92 0.16 85 / 0.7), transparent 65%)" }}/>
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "radial-gradient(circle, oklch(0.92 0.16 85 / 0.7), transparent 65%)",
+            }}
+          />
         </motion.div>
 
         {/* particles */}
@@ -152,31 +151,41 @@ export function HomeHero() {
               <motion.path
                 d="M200 370 C 195 395, 178 420, 165 470"
                 stroke="oklch(0.5 0.08 55)"
-                strokeWidth="2" fill="none" strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
                 style={{ pathLength: rootsLen }}
               />
               <motion.path
                 d="M200 370 C 205 398, 222 425, 238 478"
                 stroke="oklch(0.5 0.08 55)"
-                strokeWidth="2" fill="none" strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
                 style={{ pathLength: rootsLen }}
               />
               <motion.path
                 d="M200 370 C 200 400, 200 440, 200 490"
                 stroke="oklch(0.5 0.08 55)"
-                strokeWidth="2.2" fill="none" strokeLinecap="round"
+                strokeWidth="2.2"
+                fill="none"
+                strokeLinecap="round"
                 style={{ pathLength: rootsLen }}
               />
               <motion.path
                 d="M200 370 C 188 388, 168 395, 142 405"
                 stroke="oklch(0.5 0.08 55)"
-                strokeWidth="1.4" fill="none" strokeLinecap="round"
+                strokeWidth="1.4"
+                fill="none"
+                strokeLinecap="round"
                 style={{ pathLength: rootsLen }}
               />
               <motion.path
                 d="M200 370 C 212 388, 232 395, 258 402"
                 stroke="oklch(0.5 0.08 55)"
-                strokeWidth="1.4" fill="none" strokeLinecap="round"
+                strokeWidth="1.4"
+                fill="none"
+                strokeLinecap="round"
                 style={{ pathLength: rootsLen }}
               />
             </motion.g>
@@ -220,9 +229,15 @@ export function HomeHero() {
                 const cx = 200 + Math.cos(a) * 22;
                 const cy = 130 + Math.sin(a) * 22;
                 return (
-                  <ellipse key={i} cx={cx} cy={cy} rx="14" ry="9"
+                  <ellipse
+                    key={i}
+                    cx={cx}
+                    cy={cy}
+                    rx="14"
+                    ry="9"
                     fill="oklch(0.86 0.17 82 / 0.95)"
-                    transform={`rotate(${(a * 180) / Math.PI} ${cx} ${cy})`} />
+                    transform={`rotate(${(a * 180) / Math.PI} ${cx} ${cy})`}
+                  />
                 );
               })}
               <circle cx="200" cy="130" r="12" fill="url(#bloomGrad)" />
@@ -259,7 +274,10 @@ export function HomeHero() {
           <div
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80vmin] w-[120vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{ background: "radial-gradient(ellipse at center, oklch(0.965 0.015 88 / 0.85) 0%, oklch(0.965 0.015 88 / 0.55) 35%, transparent 70%)" }}
+            style={{
+              background:
+                "radial-gradient(ellipse at center, oklch(0.965 0.015 88 / 0.85) 0%, oklch(0.965 0.015 88 / 0.55) 35%, transparent 70%)",
+            }}
           />
           <span className="mb-5 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-[10px] uppercase tracking-[0.4em] text-forest-deep shadow-soft">
             <span className="h-1.5 w-1.5 rounded-full bg-turmeric animate-glow-pulse" />
@@ -271,8 +289,8 @@ export function HomeHero() {
             <span className="shimmer-text italic">Premium Powders.</span>
           </h1>
           <p className="mt-7 max-w-2xl text-base md:text-lg text-forest-deep leading-relaxed text-legible">
-            Organic fruit, flower, vegetable and superfood powders — crafted with
-            purity, precision and the patience of the seasons.
+            Organic fruit, flower, vegetable and superfood powders — crafted with purity, precision
+            and the patience of the seasons.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link to="/products">
@@ -308,28 +326,48 @@ export function HomeStory() {
       kicker: "01 · Field",
       title: "Where Quality Begins",
       copy: "At Phyto Health Organics, we work with carefully sourced botanical ingredients originating from agricultural regions known for their quality and consistency. Whether it is turmeric, spirulina, moringa, fruit powders, or flower-based ingredients, attention starts at the source. Every powder starts long before it reaches a processing facility. It begins in the field, where crops are grown, harvested, and selected for their natural characteristics.",
-      checks: ["Carefully Selected Farms", "Sustainable Cultivation Practices", "Traceable Raw Materials", "Focus on consistency and purity"],
+      checks: [
+        "Carefully Selected Farms",
+        "Sustainable Cultivation Practices",
+        "Traceable Raw Materials",
+        "Focus on consistency and purity",
+      ],
     },
     {
       img: processDrying,
       kicker: "02 · Preserve",
       title: "Preserving Natural Properties",
       copy: "Freshly harvested materials undergo controlled drying processes designed to preserve color, aroma, nutrients, and bioactive compounds. Every batch is processed under strict quality parameters to maintain natural integrity.",
-      checks: ["Controlled Drying Techniques", "Consistent Moisture Control", "Nutrient Retention Focus", "Quality-Assured Processing"],
+      checks: [
+        "Controlled Drying Techniques",
+        "Consistent Moisture Control",
+        "Nutrient Retention Focus",
+        "Quality-Assured Processing",
+      ],
     },
     {
       img: processStep,
       kicker: "03 · Process",
       title: "Precision Processing & Quality Control",
       copy: "Dried botanicals are transformed into fine powders using controlled milling systems. Each batch undergoes quality inspections, particle size control, and laboratory verification to ensure uniformity and performance suitable for use in nutraceuticals, functional foods, beverages, cosmetics and wellness products.",
-      checks: ["Fine Powder Processing", "Batch Consistency Monitoring", "Quality Verification Procedures", "International Standards Compliance"],
+      checks: [
+        "Fine Powder Processing",
+        "Batch Consistency Monitoring",
+        "Quality Verification Procedures",
+        "International Standards Compliance",
+      ],
     },
     {
       img: productHero,
       kicker: "04 · Packaging",
       title: "Get Set Go",
       copy: "The final stage is preparing products for their journey to customers around the world. From bulk ingredients orders to customized export requirements, our focus is on delivering products safely, efficiently and professionally. Every shipment is prepared with the documentation and handling standards required for international trade.",
-      checks: ["Food-Grade Packaging Solutions", "Export Documentation Support", "Secure Transportation Preparation", "Global Shipment Support"],
+      checks: [
+        "Food-Grade Packaging Solutions",
+        "Export Documentation Support",
+        "Secure Transportation Preparation",
+        "Global Shipment Support",
+      ],
     },
   ];
 
@@ -340,7 +378,8 @@ export function HomeStory() {
           <span className="text-[10px] uppercase tracking-[0.45em] text-turmeric">The Journey</span>
           <h2 className="text-display text-[clamp(36px,5.5vw,80px)] leading-[1.02] text-forest-deep">
             Seed to <em className="not-italic shimmer-text">Powder</em>.
-            <br />Slow-made, by intention.
+            <br />
+            Slow-made, by intention.
           </h2>
         </div>
         <div className="space-y-32">
@@ -353,13 +392,22 @@ export function HomeStory() {
   );
 }
 
-function StoryRow({ chapter, reverse }: { chapter: { img: string; kicker: string; title: string; copy: string; checks: string[] }; reverse: boolean }) {
+function StoryRow({
+  chapter,
+  reverse,
+}: {
+  chapter: { img: string; kicker: string; title: string; copy: string; checks: string[] };
+  reverse: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
   return (
-    <div ref={ref} className={`grid items-center gap-10 lg:grid-cols-12 ${reverse ? "lg:[direction:rtl]" : ""}`}>
+    <div
+      ref={ref}
+      className={`grid items-center gap-10 lg:grid-cols-12 ${reverse ? "lg:[direction:rtl]" : ""}`}
+    >
       <motion.div style={{ y }} className="lg:col-span-7 lg:[direction:ltr]">
         <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-soft">
           <motion.img
@@ -373,11 +421,15 @@ function StoryRow({ chapter, reverse }: { chapter: { img: string; kicker: string
         </div>
       </motion.div>
       <div className="lg:col-span-5 lg:[direction:ltr]">
-        <span className="text-[10px] uppercase tracking-[0.45em] text-turmeric">{chapter.kicker}</span>
+        <span className="text-[10px] uppercase tracking-[0.45em] text-turmeric">
+          {chapter.kicker}
+        </span>
         <h3 className="mt-3 text-display text-[clamp(28px,3.5vw,48px)] leading-tight text-forest-deep">
           {chapter.title}
         </h3>
-        <p className="mt-5 text-base text-forest-deep/75 leading-relaxed max-w-md">{chapter.copy}</p>
+        <p className="mt-5 text-base text-forest-deep/75 leading-relaxed max-w-md">
+          {chapter.copy}
+        </p>
         <ul className="mt-6 space-y-2">
           {chapter.checks.map((item) => (
             <li key={item} className="flex items-center gap-2.5 text-sm text-forest-deep/80">

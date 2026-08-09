@@ -13,15 +13,20 @@ export function OrganicCursor() {
     setEnabled(can);
     if (!can) return;
     document.documentElement.classList.add("has-cursor");
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let rx = mx, ry = my;
+    let mx = window.innerWidth / 2,
+      my = window.innerHeight / 2;
+    let rx = mx,
+      ry = my;
     const move = (e: MouseEvent) => {
-      mx = e.clientX; my = e.clientY;
+      mx = e.clientX;
+      my = e.clientY;
       if (dot.current) {
         dot.current.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
       }
       const t = e.target as HTMLElement | null;
-      const interactive = !!t?.closest("a,button,[data-cursor='hover'],input,textarea,select,label");
+      const interactive = !!t?.closest(
+        "a,button,[data-cursor='hover'],input,textarea,select,label",
+      );
       setHover(interactive);
     };
     let raf = 0;

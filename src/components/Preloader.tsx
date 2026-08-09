@@ -7,7 +7,10 @@ export function Preloader() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const seen = sessionStorage.getItem("ayra:loaded");
-    if (seen) { setDone(true); return; }
+    if (seen) {
+      setDone(true);
+      return;
+    }
     const t = setTimeout(() => {
       sessionStorage.setItem("ayra:loaded", "1");
       setDone(true);
@@ -27,7 +30,9 @@ export function Preloader() {
           {/* warm sun */}
           <motion.div
             className="absolute -top-40 left-1/2 -translate-x-1/2 h-[60vmin] w-[60vmin] rounded-full"
-            style={{ background: "radial-gradient(circle, oklch(0.92 0.16 85 / 0.55), transparent 65%)" }}
+            style={{
+              background: "radial-gradient(circle, oklch(0.92 0.16 85 / 0.55), transparent 65%)",
+            }}
             initial={{ y: -200, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 1.4 }}
@@ -50,7 +55,10 @@ export function Preloader() {
 
             {/* falling seed */}
             <motion.ellipse
-              cx="100" cy="160" rx="9" ry="13"
+              cx="100"
+              cy="160"
+              rx="9"
+              ry="13"
               fill="url(#seedG)"
               initial={{ cy: -20, opacity: 0 }}
               animate={{ cy: 160, opacity: 1 }}
@@ -61,7 +69,9 @@ export function Preloader() {
             <motion.path
               d="M100 168 C 90 185, 80 195, 72 218 M100 168 C 110 188, 120 200, 130 222 M100 168 C 100 190, 100 205, 100 226"
               stroke="oklch(0.34 0.05 55)"
-              strokeWidth="1.6" fill="none" strokeLinecap="round"
+              strokeWidth="1.6"
+              fill="none"
+              strokeLinecap="round"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 0.85 }}
               transition={{ delay: 1.0, duration: 1.1, ease: "easeOut" }}
@@ -70,7 +80,10 @@ export function Preloader() {
             {/* stem */}
             <motion.path
               d="M100 160 C 100 130, 96 105, 100 70"
-              stroke="url(#stem)" strokeWidth="3" fill="none" strokeLinecap="round"
+              stroke="url(#stem)"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ delay: 1.4, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}

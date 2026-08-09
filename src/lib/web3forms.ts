@@ -19,7 +19,9 @@ export async function submitWeb3Forms(formData: FormData, subject?: string) {
   };
 
   if (!response.ok || data.success !== true) {
-    throw new Error(data.message ?? "Something went wrong while sending your message. Please try again.");
+    throw new Error(
+      data.message ?? "Something went wrong while sending your message. Please try again.",
+    );
   }
 
   return data;

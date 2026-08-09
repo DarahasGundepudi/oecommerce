@@ -3,13 +3,48 @@ import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 
 const INDUSTRIES = [
-  { id: "food", title: "Food & Beverage", icon: "🍵", copy: "Functional foods, instant mixes, premium teas, snack seasonings." },
-  { id: "nutra", title: "Nutraceuticals", icon: "💊", copy: "Capsules, tablets, powdered supplements, sports nutrition." },
-  { id: "cosmetics", title: "Cosmetics", icon: "🌸", copy: "Face masks, ubtans, hair powders, natural colorants." },
-  { id: "herbal", title: "Herbal Medicine", icon: "🌿", copy: "Ayurveda, traditional formulations, churnas, herbal teas." },
-  { id: "wellness", title: "Wellness Brands", icon: "🍃", copy: "Adaptogens, calming blends, immunity stacks, beauty-from-within." },
-  { id: "retail", title: "Retailers", icon: "🛒", copy: "Private-label retail packs, sachets, jars, gift sets." },
-  { id: "bulk", title: "Bulk Manufacturers", icon: "🏭", copy: "B2B grade powders in 25 kg drums and bespoke MOQs." },
+  {
+    id: "food",
+    title: "Food & Beverage",
+    icon: "🍵",
+    copy: "Functional foods, instant mixes, premium teas, snack seasonings.",
+  },
+  {
+    id: "nutra",
+    title: "Nutraceuticals",
+    icon: "💊",
+    copy: "Capsules, tablets, powdered supplements, sports nutrition.",
+  },
+  {
+    id: "cosmetics",
+    title: "Cosmetics",
+    icon: "🌸",
+    copy: "Face masks, ubtans, hair powders, natural colorants.",
+  },
+  {
+    id: "herbal",
+    title: "Herbal Medicine",
+    icon: "🌿",
+    copy: "Ayurveda, traditional formulations, churnas, herbal teas.",
+  },
+  {
+    id: "wellness",
+    title: "Wellness Brands",
+    icon: "🍃",
+    copy: "Adaptogens, calming blends, immunity stacks, beauty-from-within.",
+  },
+  {
+    id: "retail",
+    title: "Retailers",
+    icon: "🛒",
+    copy: "Private-label retail packs, sachets, jars, gift sets.",
+  },
+  {
+    id: "bulk",
+    title: "Bulk Manufacturers",
+    icon: "🏭",
+    copy: "B2B grade powders in 25 kg drums and bespoke MOQs.",
+  },
 ];
 
 export function Industries() {

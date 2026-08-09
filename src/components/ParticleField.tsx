@@ -2,8 +2,14 @@
 import { useEffect, useRef } from "react";
 
 type Particle = {
-  x: number; y: number; vx: number; vy: number;
-  r: number; hue: number; alpha: number; life: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+  hue: number;
+  alpha: number;
+  life: number;
 };
 
 const PALETTE = [
@@ -33,7 +39,8 @@ export function ParticleField({
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d", { alpha: true })!;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0;
+    let w = 0,
+      h = 0;
     let particles: Particle[] = [];
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,7 +48,8 @@ export function ParticleField({
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      w = rect.width; h = rect.height;
+      w = rect.width;
+      h = rect.height;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -70,7 +78,10 @@ export function ParticleField({
       mouse.current.x = e.clientX - rect.left;
       mouse.current.y = e.clientY - rect.top;
     };
-    const onLeave = () => { mouse.current.x = -9999; mouse.current.y = -9999; };
+    const onLeave = () => {
+      mouse.current.x = -9999;
+      mouse.current.y = -9999;
+    };
 
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
@@ -81,7 +92,7 @@ export function ParticleField({
         const dy = p.y - mouse.current.y;
         const d2 = dx * dx + dy * dy;
         if (d2 < 14000) {
-          const f = (14000 - d2) / 14000 * 0.9;
+          const f = ((14000 - d2) / 14000) * 0.9;
           p.vx += (dx / Math.sqrt(d2 + 0.01)) * f * 0.4;
           p.vy += (dy / Math.sqrt(d2 + 0.01)) * f * 0.4;
         }

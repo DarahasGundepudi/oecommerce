@@ -27,15 +27,21 @@ export function SiteNav() {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2.5" : "py-5"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "py-2.5" : "py-5"
+      }`}
     >
       <div className="mx-auto max-w-7xl px-5 lg:px-10">
         <div
-          className={`flex items-center justify-between rounded-full px-5 lg:px-7 py-1 transition-all duration-500 glass shadow-soft ${scrolled ? "" : ""
-            }`}
+          className={`flex items-center justify-between rounded-full px-5 lg:px-7 py-1 transition-all duration-500 glass shadow-soft ${
+            scrolled ? "" : ""
+          }`}
         >
-          <Link to="/" className="group flex items-center gap-2" aria-label="Phyto Health Organics — Home">
+          <Link
+            to="/"
+            className="group flex items-center gap-2"
+            aria-label="Phyto Health Organics — Home"
+          >
             <img
               src={logoSrc}
               alt="Phyto Health Organics"
@@ -47,8 +53,7 @@ export function SiteNav() {
                 <span className="text-forest-deep">PHYTO</span>{" "}
                 <span className="text-turmeric">HEALTH</span>
               </span>
-              <br className="sm:hidden" />
-              {" "}<span className="text-forest-deep">ORGANICS</span>
+              <br className="sm:hidden" /> <span className="text-forest-deep">ORGANICS</span>
             </span>
           </Link>
 
@@ -113,4 +118,3 @@ export function SiteNav() {
     </motion.header>
   );
 }
-
