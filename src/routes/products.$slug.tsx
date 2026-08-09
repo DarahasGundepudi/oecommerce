@@ -109,6 +109,9 @@ function ProductDetail() {
                     alt={p.name}
                     className="h-full w-full object-contain"
                   />
+                  <span className="absolute bottom-4 right-4 rounded-full border border-forest/10 bg-cream/70 px-1.5 py-px text-[7px] font-medium uppercase tracking-[0.08em] text-forest-deep/50 backdrop-blur-sm">
+                    AI generated content
+                  </span>
                 </div>
               </motion.div>
             ) : (
@@ -235,6 +238,9 @@ function ProductDetail() {
                     />
                     {/* soft gradient fade at bottom to blend into card */}
                     <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-cream/60 to-transparent" />
+                    <span className="absolute bottom-2 right-2 rounded-full border border-forest/10 bg-cream/70 px-1.5 py-px text-[7px] font-medium uppercase tracking-[0.08em] text-forest-deep/50 backdrop-blur-sm">
+                      AI generated content
+                    </span>
                   </div>
                 ) : (
                   <div

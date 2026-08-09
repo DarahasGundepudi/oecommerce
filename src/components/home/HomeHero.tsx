@@ -7,6 +7,7 @@ import { ParticleField } from "@/components/ParticleField";
 import heroFarm from "@/assets/hero-farm.jpg";
 import seedSprout from "@/assets/seed-sprout.jpg";
 import powderBurst from "@/assets/powder-burst.jpg";
+import processStep from "@/assets/03-process.jpg";
 import processDrying from "@/assets/process-drying.jpg";
 import productHero from "@/assets/product-hero.jpg";
 
@@ -345,7 +346,7 @@ export function HomeStory() {
       ],
     },
     {
-      img: powderBurst,
+      img: processStep,
       kicker: "03 · Process",
       title: "Precision Processing & Quality Control",
       copy: "Dried botanicals are transformed into fine powders using controlled milling systems. Each batch undergoes quality inspections, particle size control, and laboratory verification to ensure uniformity and performance suitable for use in nutraceuticals, functional foods, beverages, cosmetics and wellness products.",
